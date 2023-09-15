@@ -1,6 +1,7 @@
 export default class Model {
     constructor() {
         this.BASE_URL = "https://jsonplaceholder.typicode.com";
+        this.count = 0; 
     }
 
     async getData() {
@@ -21,6 +22,7 @@ export default class Model {
             console.log(err);
         }
     }
+
     async deleteData(postId) {
         try {
             const response = await fetch(`${this.BASE_URL}/posts/${postId}`, {
@@ -36,6 +38,29 @@ export default class Model {
             }
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    async postData(data) {
+        try {
+            const response = await fetch(`${this.BASE_URL}/posts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+    
+            if (response.ok) {
+                console.log('Successfully posted data:', data);
+            } else {
+                console.error('Failed to post data:', data);
+            }
+    
+            return response; 
+        } catch (error) {
+            console.error(error);
+            return null; 
         }
     }
 }

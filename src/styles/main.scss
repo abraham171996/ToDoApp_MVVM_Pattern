@@ -170,6 +170,13 @@ header {
     gap: 20px;
     align-items: center;
     justify-content: center;
+    .icon{
+        width: 100%;
+        padding-left: 60px;
+        span{
+            cursor: pointer;
+        }
+    }
     h2 {
         color: var(--Body, #1b1b1d);
         font-family: Inter;
