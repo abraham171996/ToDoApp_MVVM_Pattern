@@ -1,16 +1,24 @@
 export default class Model {
     constructor() {
         this.BASE_URL = "https://jsonplaceholder.typicode.com";
-        this.allData = [];
     }
 
     async getData() {
         try {
             const response = await fetch(`${this.BASE_URL}/posts`);
-            const data = await response.json();
-            this.allData = data;
-        } catch (err) {
-            console.error(err);
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async getComment() {
+        try{
+            const res = await fetch(`${this.BASE_URL}/comments`)
+            return await res.json()
+        }
+        catch(err){
+            console.log(err);
         }
     }
     async deleteData(postId) {
@@ -21,15 +29,13 @@ export default class Model {
                     'Content-Type': 'application/json',
                 },
             });
-
             if (response.ok) {
                 console.log(`Successfully deleted post with ID ${postId}`);
-                // You can update your data or UI here if needed.
             } else {
                 console.error(`Failed to delete post with ID ${postId}`);
             }
-        } catch (err) {
-            console.error(err);
+        } catch (error) {
+            console.error(error);
         }
     }
 }
